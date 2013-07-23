@@ -43,7 +43,7 @@
                     {formbutton class='z-bt-cancel' commandName='cancel' __text='Cancel' }
                 </div>
         </fieldset>
-        {formtextinput textMode="hidden" id="id"}
+        {if $id}{formtextinput textMode="hidden" id="id"}{/if}
     {/form}
 {/nocache}
 
