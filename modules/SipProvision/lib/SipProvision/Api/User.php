@@ -63,13 +63,72 @@ class SipProvision_Api_User extends Zikula_AbstractApi
 	    if ($ret) {
 		    LogUtil::registerStatus("Insert Successful");
 	    } else {
-		    LogUtil::registerStatus("Failed insert");
+		    LogUtil::registerError("Failed insert");
+	    }
+	}
+        // LogUtil::registerStatus('Well, this is the end !');
+        return $ret;
+    }
+
+    public function getPhone($args)
+    {
+	if (isset($args['id'])) {
+	    $id = $args['id'];
+	} else {
+	    return false;
+	}
+	$phone = DBUtil::selectObjectById('sipprovision_phoness', $id);
+	return $phone;
+    }
+
+    /*Eventually something will need to be passed in to specify a company file*/
+    public function getPhones($args)
+    {
+        // return(array('foo' => 'bar'));
+	$where ='';
+	if (isset($args['company'])) {
+	    $company = $args['company'];
+	    if (is_numeric($company)) {
+		$where = "where company=$company";
+	    }
+	}
+	$phones = DBUtil::selectObjectArray('sipprovision_phones', $where);
+		// '',-1, -1, 'extension', null, null, array('id','extension', 'label'));
+	return $phones;
+    }
+
+    public function savePhone($args)
+    {
+	if (isset($args['phone'])) {
+	    $phone = $args['phone'];
+	} else {
+	    return "No data passed";
+	}
+	
+	// Until companies are implemented, hard-code to WestNet;
+	if (!isset($phone['company'])) {
+	    $phone['company'] = 0;
+	}
+	if (isset($phone['id'])) {
+            $ret = DBUtil::updateObject($phone, 'sipprovision_phones');
+	    if ($ret) {
+		    LogUtil::registerStatus("Update Successful");
+	    } else {
+		    LogUtil::registerError("Failed update");
+	    }
+	} else {
+	    $ret = DBUtil::insertObject($phone, 'sipprovision_phones');
+	    if ($ret) {
+		    LogUtil::registerStatus("Insert Successful");
+	    } else {
+		    LogUtil::registerError("Failed insert");
 	    }
 	    LogUtil::registerStatus('Insert Completed');
 	}
         // LogUtil::registerStatus('Well, this is the end !');
         return $ret;
     }
+    
 }
 
 ?>

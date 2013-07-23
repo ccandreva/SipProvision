@@ -44,7 +44,7 @@ function SipProvision_tables()
       'mac' => 'mac',
       'extension' => 'extension',
   );
-  $tables['sipprovision_phones_column'] = array(
+  $tables['sipprovision_phones_column_def'] = array(
       'id'  => 'I UNSIGNED NOTNULL AUTOINCREMENT PRIMARY',
       'company' => 'I UNSIGNED',
       'mac' => 'C(12)',

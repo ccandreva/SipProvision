@@ -24,10 +24,9 @@ class SipProvision_Controller_Admin extends Zikula_AbstractController
             return LogUtil::registerPermissionError();
         }
             
-        $this->view->assign('templatetitle', 'SipProvision :: Edit Extension');
         $id = FormUtil :: getPassedValue('id');
         $view = FormUtil::newForm('SipProvision', $this);
-        $view->assign('templatetitle', 'DbtDiary :: Edit Diary');
+        $view->assign('templatetitle', 'SipProvision :: Edit Extension');
                 
         $tmplfile = 'sipprovision_admin_editextension.tpl';
         $args = array();
@@ -48,6 +47,38 @@ class SipProvision_Controller_Admin extends Zikula_AbstractController
 	//$data = DBUtil::selectObjectArray('sipprovision_extensions');
 	$this->view->assign('data', $data);
 	return $this->view->fetch('sipprovision_admin_listextensions.tpl');
+    }
+    
+    public function EditPhone()
+    {
+	// Perform access check
+        if (!SecurityUtil::checkPermission('SipProvision:EditPhone:', '::', ACCESS_ADMIN)) {
+            return LogUtil::registerPermissionError();
+        }
+            
+        $id = FormUtil :: getPassedValue('id');
+        $view = FormUtil::newForm('SipProvision', $this);
+        $view->assign('templatetitle', 'SipProvision :: Edit Phone');
+                
+        $tmplfile = 'sipprovision_admin_editphone.tpl';
+        $args = array();
+        if ($id) $args['id'] = $id;
+        $formobj = new SipProvision_Form_Handler_EditPhone($args);
+        $output = $view->execute($tmplfile, $formobj);
+        return $output;
+
+    }
+
+    public function ListPhones()
+    {
+	// Perform access check
+        if (!SecurityUtil::checkPermission('SipProvision:ListPhones:', '::', ACCESS_ADMIN)) {
+            return LogUtil::registerPermissionError();
+        }
+	$data = ModUtil::apiFunc('SipProvision', 'User', 'getPhones', array());
+	//$data = DBUtil::selectObjectArray('sipprovision_extensions');
+	$this->view->assign('data', $data);
+	return $this->view->fetch('sipprovision_admin_listphones.tpl');
     }
     
     public function ListLog()
