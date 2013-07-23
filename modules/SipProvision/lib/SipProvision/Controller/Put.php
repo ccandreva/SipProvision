@@ -9,7 +9,7 @@
  * 
  */
 
-class SipProvision_Controller_PUT extends Zikula_AbstractController
+class SipProvision_Controller_Put extends Zikula_AbstractController
 {
     public function AddLog()
     {

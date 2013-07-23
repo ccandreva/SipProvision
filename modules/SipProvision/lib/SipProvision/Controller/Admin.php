@@ -81,17 +81,17 @@ class SipProvision_Controller_Admin extends Zikula_AbstractController
 	return $this->view->fetch('sipprovision_admin_listphones.tpl');
     }
     
-    public function ListLog()
+    public function ListLogs()
     {
 	// Perform access check
         if (!SecurityUtil::checkPermission('SipProvision::', '::', ACCESS_ADMIN)) {
             return LogUtil::registerPermissionError();
         }
 
-	$logs = DBUtil::selectObjectArray ('sipprovision_logs', '',
-		'',-1, -1, 'date', null, null, array('id', 'date', 'filename'));
+	$logs = DBUtil::selectObjectArray ('sipprovision_logs'); //, '',
+		// '',-1, -1, 'date', null, null, array('id', 'date', 'filename'));
 	$this->view->assign('logs',$logs);
-	return $this->view->fetch('sipprovision_user_listlog.tpl');
+	return $this->view->fetch('sipprovision_user_listlogs.tpl');
     }
 
     public function ViewLog()

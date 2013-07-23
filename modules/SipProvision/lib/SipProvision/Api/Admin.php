@@ -24,9 +24,11 @@ class SipProvision_Api_Admin extends Zikula_AbstractApi
               array('url' => ModUtil::url('SipProvision', 'admin', 'main'),
                   text=>$this->__('Main'), 'class' => 'z-icon-es-preview'),
               array('url' => ModUtil::url('SipProvision', 'admin', 'listExtensions'),
-                  text=>$this->__('List Extensions'), 'class' => 'z-icon-es-view'),
+                  text=>$this->__('Extensions'), 'class' => 'z-icon-es-view'),
               array('url' => ModUtil::url('SipProvision', 'admin', 'listPhones'),
-                  text=>$this->__('List Phones'), 'class' => 'z-icon-es-view'),
+                  text=>$this->__('Phones'), 'class' => 'z-icon-es-view'),
+              array('url' => ModUtil::url('SipProvision', 'admin', 'listLogs'),
+                  text=>$this->__('Logs'), 'class' => 'z-icon-es-view'),
             );
         }
         return $links;
