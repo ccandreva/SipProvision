@@ -89,8 +89,11 @@ class SipProvision_Api_User extends Zikula_AbstractApi
 	if (isset($args['company'])) {
 	    $company = $args['company'];
 	    if (is_numeric($company)) {
-		$where = "where company=$company";
+		$where = "company=$company";
 	    }
+	}
+	if (isset($args['mac'])) {
+	    $where .= "mac='" . $args['mac'] . "'";
 	}
 	$phones = DBUtil::selectObjectArray('sipprovision_phones', $where);
 		// '',-1, -1, 'extension', null, null, array('id','extension', 'label'));
