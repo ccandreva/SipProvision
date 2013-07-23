@@ -16,6 +16,7 @@ class SipProvision_Installer extends Zikula_AbstractInstaller
         ModUtil::setVar('SipProvision', 'modulestylesheet', 'style.css');
 
         if ( !DBUtil::createTable('sipprovision_logs') ) return false;
+        if ( !DBUtil::createTable('sipprovision_extensions') ) return false;
 
 	return true;
     }
@@ -27,7 +28,8 @@ class SipProvision_Installer extends Zikula_AbstractInstaller
     
     public function uninstall()
     {
-	DBUtil::dropTable('SipProvision');
+	DBUtil::dropTable('sipprovision_logs');
+	DBUtil::dropTable('sipprovision_extensions');
 	return true;
     }
 }
