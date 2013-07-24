@@ -22,16 +22,16 @@ class SipProvision_Controller_XML extends Zikula_AbstractController
 	$line = FormUtil::getPassedValue('line');
 	if ($mac) {
 	    $data = ModUtil::apiFunc('SipProvision', 'User', 'getPhones', array('mac' => $mac));
+	    if (is_array($data)) $datum = $data[0]; else exit(404);
 	    $tpl = 'sipprovision_xml_mac.tpl';
 	} elseif ($line) {
-	    $data = ModUtil::apiFunc('SipProvision', 'User', 'getExtensions', array('line' => $line));
+	    $datum = ModUtil::apiFunc('SipProvision', 'User', 'getExtension', array('id' => $line));
 	    $tpl = 'sipprovision_xml_phone.tpl';
 	}
-	if (is_array($data)) $datum = $data[0]; else exit(404);
 	if (!is_array($datum)) exit ("404 Eat me");
 	$this->view->assign($datum);
 	header('Content-Type: text/plain');
-	foreach ($datum as $k => $v) echo "$k -> $v\n";
+	//foreach ($datum as $k => $v) echo "$k -> $v\n";
 	echo $this->view->fetch($tpl);
 	exit (200);
     }
