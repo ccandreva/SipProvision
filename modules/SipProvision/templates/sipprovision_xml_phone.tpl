@@ -4,7 +4,7 @@
 <phone1>
   <reg
 	reg.1.address="{$address}"
-	reg.1.displayName="{$displayname}"
+	reg.1.displayName="{$firstname} {$lastname}"
 	reg.1.label="{$label}"
 	reg.1.auth.userId="{$authuserid}"
 	reg.1.auth.password="{$authpassword}"

@@ -14,8 +14,12 @@
                 </div>
 
                 <div class="z-formrow">
-                        {formlabel for="displayname" __text="Display Name" mandatorysym=0}
-                        {formtextinput id="displayname" maxLength="255" width="10em"}
+                        {formlabel for="firstname" __text="First Name" mandatorysym=0}
+                        {formtextinput id="firstname" maxLength="255" width="10em"}
+                </div>
+                <div class="z-formrow">
+                        {formlabel for="lastname" __text="Last Name" mandatorysym=0}
+                        {formtextinput id="lastname" maxLength="255" width="10em"}
                 </div>
 
                 <div class="z-formrow">
