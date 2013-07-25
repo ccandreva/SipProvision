@@ -35,4 +35,30 @@ class SipProvision_Controller_XML extends Zikula_AbstractController
 	echo $this->view->fetch($tpl);
 	exit (200);
     }
-}
+
+        public function getDirectory()
+    {
+	// Authentication by IP address:
+	$ip = System::serverGetVar('REMOTE_ADDR');
+	if (!preg_match('/^216\.187\.52\./', $ip)) {
+		return LogUtil::registerPermissionError();
+	}
+	$mac = FormUtil::getPassedValue('mac');
+	if ($mac) {
+	    $data = ModUtil::apiFunc('SipProvision', 'User', 'getPhones', array('mac' => $mac));
+	    if (is_array($data)) $datum = $data[0]; else exit(404);
+	}
+	$args = array();
+	if (is_array($datum)) {
+	    $extId = $datum['extension'];
+	    $args['where'] = "id != $extId";
+	}
+	$extensions = ModUtil::apiFunc('SipProvision', 'User', 'getExtensions', $args);
+	$this->view->assign('extensions', $extensions);
+	header('Content-Type: text/plain');
+	//foreach ($datum as $k => $v) echo "$k -> $v\n";
+	echo $this->view->fetch('sipprovision_xml_getdirectory.tpl');
+	exit (200);
+    }
+
+	}

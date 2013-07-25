@@ -28,6 +28,9 @@ class SipProvision_Api_User extends Zikula_AbstractApi
     {
         // return(array('foo' => 'bar'));
 	$where ='';
+	if (isset($args['where'])) {
+	    $where = $args['where'];
+	}
 	if (isset($args['company'])) {
 	    $company = $args['company'];
 	    if (is_numeric($company)) {
