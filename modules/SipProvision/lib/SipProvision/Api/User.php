@@ -80,7 +80,7 @@ class SipProvision_Api_User extends Zikula_AbstractApi
 	} else {
 	    return false;
 	}
-	$phone = DBUtil::selectObjectById('sipprovision_phoness', $id);
+	$phone = DBUtil::selectObjectById('sipprovision_phones', $id);
 	return $phone;
     }
 
